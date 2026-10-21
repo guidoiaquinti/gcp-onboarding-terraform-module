@@ -24,3 +24,17 @@ When `enable_vm_scanning = true`, the module:
 - creates the custom role `aikidoSecurityVmScannerSnapshotDeleteRole`
 - binds the provided managed scanner service account to both roles at the organization level
 - applies a condition on the delete role binding so it only matches Aikido-managed snapshots
+
+## Credential verification
+
+For onboarding, set `enable_host_project_services = true` and
+`enable_artifact_registry_reader = true`. Both default to `false`. A reported
+US-instance credential check required Artifact Registry read access and the
+Artifact Registry and BigQuery APIs in the WIF host project, even when the
+organization had no Artifact Registry repositories. Enabling host-project
+services includes both APIs and the other scanning APIs.
+
+See the [organization usage example](../../README.md#modulesorg) and
+[configuration example](../../examples/org) for these settings. If verification
+reports `Unable to authenticate to Artifact Registry` or `Unable to authenticate
+to BigQuery`, apply these settings in the host project and retry verification.

@@ -14,8 +14,10 @@ host_project_number = "123456789"
 # Aikido instance region: eu, us, me, or au
 aikido_region = "eu"
 
-# Enable artifact registry scanning (disabled by default)
-enable_artifact_registry_reader = false
+# Enable host-project scanning APIs and Artifact Registry access for credential verification
+# The module defaults to false for both settings
+enable_host_project_services    = true
+enable_artifact_registry_reader = true
 
 # Enable GCP VM scanning IAM (disabled by default)
 enable_vm_scanning = false

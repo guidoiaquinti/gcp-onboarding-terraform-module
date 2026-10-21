@@ -95,8 +95,26 @@ module "aikido" {
   project_id      = "my-host-project"
   project_number  = "123456789"
   aikido_region   = "eu"
+
+  enable_host_project_services    = true
+  enable_artifact_registry_reader = true
 }
 ```
+
+### Credential verification
+
+For organization onboarding, set both `enable_host_project_services = true` and
+`enable_artifact_registry_reader = true`, as shown above. A reported US-instance
+credential check required Artifact Registry read access and the Artifact Registry
+and BigQuery APIs in the host project, even without any Artifact Registry
+repositories. The host-project services setting enables both APIs along with the
+other scanning APIs. These module settings default to `false`; enabling APIs in
+other organization projects does not enable them in the WIF host project.
+
+If verification reports `Unable to authenticate to Artifact Registry` or
+`Unable to authenticate to BigQuery`, check these settings, apply the changes,
+and retry verification. The project module already enables these APIs and grants
+Artifact Registry read access.
 
 ### Optional VM scanning
 

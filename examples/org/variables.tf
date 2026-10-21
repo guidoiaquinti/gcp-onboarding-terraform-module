@@ -82,3 +82,9 @@ variable "workload_identity_pool_display_name" {
   type        = string
   default     = "Aikido Identity Pool"
 }
+
+variable "enable_host_project_services" {
+  description = "Whether to enable scanning APIs in the WIF host project; recommended for credential verification."
+  type        = bool
+  default     = false
+}
