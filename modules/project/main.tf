@@ -152,6 +152,8 @@ resource "google_project_iam_member" "aikido_project_roles" {
   project = var.project_id
   role    = each.value.role
   member  = each.value.member
+
+  depends_on = [google_iam_workload_identity_pool.aikido]
 }
 
 resource "google_project_iam_member" "aikido_artifact_registry_reader" {
@@ -160,6 +162,8 @@ resource "google_project_iam_member" "aikido_artifact_registry_reader" {
   project = var.project_id
   role    = "roles/artifactregistry.reader"
   member  = each.value
+
+  depends_on = [google_iam_workload_identity_pool.aikido]
 }
 
 resource "google_project_iam_custom_role" "vm_scanner" {
