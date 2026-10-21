@@ -47,3 +47,10 @@ output "vm_scanner_delete_role_id" {
   description = "Role ID of the VM scanner delete custom role when enable_vm_scanning is true."
   value       = try(google_organization_iam_custom_role.vm_scanner_delete[0].role_id, null)
 }
+
+output "org_principal_members" {
+  description = "Members for organization roles, one per Aikido AWS cloud scanning role."
+  value       = sort(values(local.project_principal_members))
+
+  depends_on = [google_iam_workload_identity_pool.aikido]
+}
